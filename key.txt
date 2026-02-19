@@ -9,7 +9,7 @@ import time
 import uuid
 
 # ==========================================
-# BRX REG+ ULTIMATE CONFIGURATION
+# BRX REG+ ULTIMATE CONFIGURATION (UI ONLY)
 # ==========================================
 # !! IMPORTANT: CHANGE THIS TO YOUR WEBSITE URL !!
 API_URL = "http://www.zp12895.tld.122.155.171.217.no-domain.name/key/index.php" 
@@ -17,10 +17,7 @@ API_URL = "http://www.zp12895.tld.122.155.171.217.no-domain.name/key/index.php"
 APP_TITLE = "BRX REG+ [ULTIMATE]"
 APP_WIDTH = 600
 APP_HEIGHT = 400
-VERSION = "2.7.0-RedShift"
-
-# [REMOVED] ลบการบังคับ DPI Awareness ออก เพื่อให้ Windows จัดการ Scale ให้เอง
-# ป้องกันปัญหา UI บัค/ตัวหนังสือเพี้ยนในจอ High DPI หรือ Scaling 125%+
+VERSION = "2.7.0-RedShift (Visual Only)"
 
 # ตรวจสอบการติดตั้ง pywebview
 try:
@@ -77,9 +74,6 @@ class LicenseGuard:
 # ==========================================
 # FRONTEND TEMPLATES (RED THEME 600x400)
 # ==========================================
-# CSS Fixes: Removed aggressive letter-spacing, fixed 100% width/height
-# CSS Variables removed for IE compatibility
-
 # 0. LOADING SCREEN
 HTML_LOADING = r"""
 <!DOCTYPE html>
@@ -363,7 +357,6 @@ HTML_CONTENT = r"""
     <title>BRX REG+</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables removed for IE Compatibility */
         * { box-sizing: border-box; user-select: none; -ms-user-select: none; -webkit-font-smoothing: antialiased; }
         
         html, body {
@@ -375,8 +368,8 @@ HTML_CONTENT = r"""
         }
 
         body {
-            background-color: #050505; /* Was var(--bg) */
-            color: #ffffff; /* Was var(--text) */
+            background-color: #050505; 
+            color: #ffffff; 
             font-family: 'Inter', 'Segoe UI', sans-serif;
             display: flex;
             display: -ms-flexbox;
@@ -402,7 +395,7 @@ HTML_CONTENT = r"""
             app-region: drag;
         }
         .brand { font-weight: 900; font-size: 11px; letter-spacing: 1px; color: #fff; }
-        .brand span { color: #ff0033; /* Was var(--accent) */ }
+        .brand span { color: #ff0033; }
         
         .controls { 
             display: flex; 
@@ -417,7 +410,7 @@ HTML_CONTENT = r"""
             line-height: 0; padding: 5px;
         }
         .win-btn:hover { color: #fff; }
-        .close-btn:hover { color: #ff0033; /* Was var(--accent) */ }
+        .close-btn:hover { color: #ff0033; }
 
         /* MAIN */
         .main-content {
@@ -462,7 +455,7 @@ HTML_CONTENT = r"""
 
         .subtitle {
             font-size: 10px;
-            color: #555555; /* Was var(--text-dim) */
+            color: #555555; 
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 40px;
@@ -472,7 +465,7 @@ HTML_CONTENT = r"""
         .btn-activate {
             width: 180px;
             height: 50px;
-            background: #0f0f0f; /* Was var(--card) - FIXED WHITE BUTTON ISSUE */
+            background: #0f0f0f;
             border: 1px solid #222;
             color: #fff;
             font-weight: 700;
@@ -494,7 +487,7 @@ HTML_CONTENT = r"""
             content: '';
             position: absolute;
             top: 0; left: 0; width: 2px; height: 100%;
-            background: #ff0033; /* Was var(--accent) */
+            background: #ff0033; 
             transition: 0.3s;
         }
         .btn-activate:hover {
@@ -507,7 +500,7 @@ HTML_CONTENT = r"""
         .btn-activate:active { transform: scale(0.98); }
 
         .btn-activate span { z-index: 2; }
-        .btn-activate svg { width: 14px; height: 14px; fill: #ff0033; /* Was var(--accent) */ z-index: 2; transition: 0.3s; }
+        .btn-activate svg { width: 14px; height: 14px; fill: #ff0033; z-index: 2; transition: 0.3s; }
         .btn-activate:hover svg { transform: translateX(3px); }
 
         /* FOOTER */
@@ -549,8 +542,8 @@ HTML_CONTENT = r"""
             margin-top: 20px; overflow: hidden;
         }
         .progress-line {
-            width: 0%; height: 100%; background: #ff0033; /* Was var(--accent) */
-            box-shadow: 0 0 10px #ff0033; /* Was var(--accent) */
+            width: 0%; height: 100%; background: #ff0033; 
+            box-shadow: 0 0 10px #ff0033; 
             transition: width 0.1s linear;
         }
         .status-text {
@@ -562,7 +555,7 @@ HTML_CONTENT = r"""
             text-align: center; display: none;
         }
         .success-icon {
-            font-size: 40px; color: #ff0033; /* Was var(--accent) */ margin-bottom: 10px;
+            font-size: 40px; color: #ff0033; margin-bottom: 10px;
             text-shadow: 0 0 20px rgba(255,0,51,0.5);
         }
         .btn-close-overlay {
@@ -570,7 +563,7 @@ HTML_CONTENT = r"""
             color: #666; padding: 8px 24px; font-size: 10px; cursor: pointer;
             transition: 0.2s;
         }
-        .btn-close-overlay:hover { border-color: #ff0033; /* Was var(--accent) */ color: #fff; }
+        .btn-close-overlay:hover { border-color: #ff0033; color: #fff; }
 
     </style>
 </head>
@@ -661,547 +654,10 @@ HTML_CONTENT = r"""
 """
 
 # ==========================================
-# REGISTRY CONSTANTS & DATA
+# BACKEND LOGIC (SIMULATION ONLY)
 # ==========================================
-HKLM = winreg.HKEY_LOCAL_MACHINE
-HKCU = winreg.HKEY_CURRENT_USER
-HKCR = winreg.HKEY_CLASSES_ROOT
-HKU  = winreg.HKEY_USERS
-
-REG_DATA = []
-
-def add_reg(root, path, name, val_type, value):
-    REG_DATA.append({
-        'root': root,
-        'path': path,
-        'name': name,
-        'type': val_type,
-        'value': value
-    })
-
-# ==========================================
-# FULL REGISTRY DATABASE (MERGED FROM ALL FILES)
-# ==========================================
-
-# --- 1.reg ---
-add_reg(HKLM, r"SOFTWARE", "AsyncOperationMode", winreg.REG_DWORD, 10)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows\CurrentVersion", "AsyncOperationMode", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "CacheManagerMemoryLimit", winreg.REG_DWORD, 3)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "UseDefaultCacheSize", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power", "CsEnabled", winreg.REG_DWORD, 0)
-add_reg(HKCU, r"System\GameConfigStore", "GameDVR_Enabled", winreg.REG_DWORD, 0)
-add_reg(HKCU, r"System\GameConfigStore", "GameDVR_FSEBehaviorMode", winreg.REG_DWORD, 2)
-add_reg(HKCU, r"System\GameConfigStore", "GameDVR_HonorUserFSEBehaviorMode", winreg.REG_DWORD, 0)
-add_reg(HKCU, r"System\GameConfigStore", "GameDVR_DXGIHonorFSEWindowsCompatible", winreg.REG_DWORD, 0)
-add_reg(HKCU, r"System\GameConfigStore", "GameDVR_EFSEFeatureFlags", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR", "value", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SOFTWARE\Policies\Microsoft\Windows\GameDVR", "AllowGameDVR", winreg.REG_DWORD, 0)
-add_reg(HKCU, r"SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR", "AppCaptureEnabled", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Windows", "ErrorMode", winreg.REG_DWORD, 2)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "Size", winreg.REG_DWORD, 3)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "MaxMpxCt", winreg.REG_DWORD, 255)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "CacheManager", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "MaxReadAheadTransferSize", winreg.REG_DWORD, 524288)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "FlushCacheInterval", winreg.REG_DWORD, 3)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "ReadAheadDepth", winreg.REG_DWORD, 100)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "MetadataFlushInterval", winreg.REG_DWORD, 3)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "CustomWritebackStrategy", winreg.REG_DWORD, 0x09000003)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "IoPageReadAheadThreshold", winreg.REG_DWORD, 0x0F000003)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "PfnDatabaseSize", winreg.REG_DWORD, 0x0F000003)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "MinWorkingSetSize", winreg.REG_DWORD, 0x09000003)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "MaxWorkingSetSize", winreg.REG_DWORD, 0x09000003)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "MmStClusterSize", winreg.REG_DWORD, 0x09000003)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "ReadaheadAggressiveness", winreg.REG_DWORD, 3)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "MemoryPressureRelief", winreg.REG_DWORD, 3)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "CustomWritebackStrategy", winreg.REG_DWORD, 0x09000003)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "ReadaheadPolicy", winreg.REG_DWORD, 3)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "FineGrainedMemoryPressure", winreg.REG_DWORD, 1)
-# Kernel Tweaks (1.reg)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "ObUnsecureGlobalNames", winreg.REG_MULTI_SZ, ["netfxcustomperfcounters.1.0", "SharedPerfIPCBlock", "Cor_Private_IPCBlock", "Cor_Public_IPCBlock_"])
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "SeTokenSingletonAttributesConfig", winreg.REG_DWORD, 3)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "obcaseinsensitive", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "KernelSEHOPEnabled", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "DisableExceptionChainValidation", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "MitigationAuditOptions", winreg.REG_BINARY, b'\x22' * 24)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "MitigationOptions", winreg.REG_BINARY, b'\x22' * 24)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "DistributeTimers", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "DisableTsx", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "MinimumDpcRate", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "DpcQueueDepth", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "ThreadDpcEnable", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "SplitLargeCaches", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "DpcWatchdogProfileOffset", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "DpcTimeout", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "DpcWatchdogPeriod", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "MaximumDpcQueueDepth", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "AdjustDpcThreshold", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "IdealDpcRate", winreg.REG_DWORD, 0)
-# Power & ModernSleep (1.reg)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power\ModernSleep", "Enabled", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SOFTWARE\Policies\Microsoft\Windows\Psched", "NonBestEffortLimit", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows\CurrentVersion\OptimalLayout", "ContigFileAlloc", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows\CurrentVersion\OptimalLayout", "DisableLowPriorityIo", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "PageCombiningThreshold", winreg.REG_DWORD, 0x40)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power", "PlatformAoAcOverride", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows\CurrentVersion\Policy", "ProcessorPriorityForeground", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\FileSystem", "ScrubMode", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\FileSystem", "FileSystemCache", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\FileSystem", "NtfsMftZoneReservation", winreg.REG_DWORD, 4)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\FileSystem", "NtfsReadaheadBufferSize", winreg.REG_DWORD, 0x00900004)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\FileSystem", "MetadataCacheSize", winreg.REG_DWORD, 0xF0000000)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\FileSystem", "CustomReadaheadDepth", winreg.REG_DWORD, 0x09000000)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\FileSystem", "CustomWritebackStrategy", winreg.REG_DWORD, 0x09000003)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager", "AlpcWakePolicy", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "SimulateCommitSavings", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "TrackLockedPages", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "TrackPtes", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power", "DeepIoCoalescingEnabled", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "SessionImageSize", winreg.REG_DWORD, 0x20)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54849625-5478-4994-5E7E-16254632457F\BC5038F7-23E0-4960-96DA-33ABAF5935EC", "Attributes", winreg.REG_DWORD, 2)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Lsa", "TokenTimeout", winreg.REG_DWORD, 0x7d0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power\PowerSettings\5466ee21-c82a-4eba-a8d7-8688278e5240\bc5038f7-23e0-4960-96da-33abaf5935ec", "Attributes", winreg.REG_DWORD, 2)
-# Tasks (1.reg)
-task_base = r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks"
-add_reg(HKLM, f"{task_base}\\Audio", "Scheduling Category", winreg.REG_SZ, "Medium")
-add_reg(HKLM, f"{task_base}\\Audio", "SFIO Priority", winreg.REG_SZ, "Normal")
-add_reg(HKLM, f"{task_base}\\Audio", "Background Only", winreg.REG_SZ, "True")
-add_reg(HKLM, f"{task_base}\\Audio", "Priority", winreg.REG_DWORD, 6)
-add_reg(HKLM, f"{task_base}\\Audio", "Clock Rate", winreg.REG_DWORD, 10000)
-add_reg(HKLM, f"{task_base}\\Audio", "GPU Priority", winreg.REG_DWORD, 8)
-add_reg(HKLM, f"{task_base}\\Audio", "Affinity", winreg.REG_DWORD, 0)
-add_reg(HKLM, f"{task_base}\\Capture", "Scheduling Category", winreg.REG_SZ, "Medium")
-add_reg(HKLM, f"{task_base}\\Capture", "SFIO Priority", winreg.REG_SZ, "Normal")
-add_reg(HKLM, f"{task_base}\\Capture", "Background Only", winreg.REG_SZ, "True")
-add_reg(HKLM, f"{task_base}\\Capture", "Priority", winreg.REG_DWORD, 5)
-add_reg(HKLM, f"{task_base}\\Capture", "Clock Rate", winreg.REG_DWORD, 10000)
-add_reg(HKLM, f"{task_base}\\Capture", "GPU Priority", winreg.REG_DWORD, 8)
-add_reg(HKLM, f"{task_base}\\Capture", "Affinity", winreg.REG_DWORD, 0)
-add_reg(HKLM, f"{task_base}\\Distribution", "Scheduling Category", winreg.REG_SZ, "Medium")
-add_reg(HKLM, f"{task_base}\\Distribution", "SFIO Priority", winreg.REG_SZ, "Normal")
-add_reg(HKLM, f"{task_base}\\Distribution", "Background Only", winreg.REG_SZ, "True")
-add_reg(HKLM, f"{task_base}\\Distribution", "Priority", winreg.REG_DWORD, 4)
-add_reg(HKLM, f"{task_base}\\Distribution", "Clock Rate", winreg.REG_DWORD, 10000)
-add_reg(HKLM, f"{task_base}\\Distribution", "GPU Priority", winreg.REG_DWORD, 8)
-add_reg(HKLM, f"{task_base}\\Distribution", "Affinity", winreg.REG_DWORD, 0)
-add_reg(HKLM, f"{task_base}\\Games", "Scheduling Category", winreg.REG_SZ, "High")
-add_reg(HKLM, f"{task_base}\\Games", "SFIO Priority", winreg.REG_SZ, "High")
-add_reg(HKLM, f"{task_base}\\Games", "Background Only", winreg.REG_SZ, "False")
-add_reg(HKLM, f"{task_base}\\Games", "Priority", winreg.REG_DWORD, 6)
-add_reg(HKLM, f"{task_base}\\Games", "Clock Rate", winreg.REG_DWORD, 10000)
-add_reg(HKLM, f"{task_base}\\Games", "GPU Priority", winreg.REG_DWORD, 8)
-add_reg(HKLM, f"{task_base}\\Games", "Affinity", winreg.REG_DWORD, 0)
-add_reg(HKLM, f"{task_base}\\Playback", "Scheduling Category", winreg.REG_SZ, "Medium")
-add_reg(HKLM, f"{task_base}\\Playback", "SFIO Priority", winreg.REG_SZ, "Normal")
-add_reg(HKLM, f"{task_base}\\Playback", "Background Only", winreg.REG_SZ, "False")
-add_reg(HKLM, f"{task_base}\\Playback", "Priority", winreg.REG_DWORD, 3)
-add_reg(HKLM, f"{task_base}\\Playback", "BackgroundPriority", winreg.REG_DWORD, 4)
-add_reg(HKLM, f"{task_base}\\Playback", "Clock Rate", winreg.REG_DWORD, 10000)
-add_reg(HKLM, f"{task_base}\\Playback", "GPU Priority", winreg.REG_DWORD, 8)
-add_reg(HKLM, f"{task_base}\\Playback", "Affinity", winreg.REG_DWORD, 0)
-add_reg(HKLM, f"{task_base}\\Pro Audio", "Scheduling Category", winreg.REG_SZ, "High")
-add_reg(HKLM, f"{task_base}\\Pro Audio", "SFIO Priority", winreg.REG_SZ, "Normal")
-add_reg(HKLM, f"{task_base}\\Pro Audio", "Background Only", winreg.REG_SZ, "False")
-add_reg(HKLM, f"{task_base}\\Pro Audio", "Priority", winreg.REG_DWORD, 1)
-add_reg(HKLM, f"{task_base}\\Pro Audio", "Clock Rate", winreg.REG_DWORD, 10000)
-add_reg(HKLM, f"{task_base}\\Pro Audio", "GPU Priority", winreg.REG_DWORD, 8)
-add_reg(HKLM, f"{task_base}\\Pro Audio", "Affinity", winreg.REG_DWORD, 0)
-add_reg(HKLM, f"{task_base}\\Window Manager", "Scheduling Category", winreg.REG_SZ, "Medium")
-add_reg(HKLM, f"{task_base}\\Window Manager", "SFIO Priority", winreg.REG_SZ, "Normal")
-add_reg(HKLM, f"{task_base}\\Window Manager", "Background Only", winreg.REG_SZ, "True")
-add_reg(HKLM, f"{task_base}\\Window Manager", "Priority", winreg.REG_DWORD, 5)
-add_reg(HKLM, f"{task_base}\\Window Manager", "Clock Rate", winreg.REG_DWORD, 10000)
-add_reg(HKLM, f"{task_base}\\Window Manager", "GPU Priority", winreg.REG_DWORD, 8)
-add_reg(HKLM, f"{task_base}\\Window Manager", "Affinity", winreg.REG_DWORD, 0)
-# FeatureSettings (1.reg)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "FeatureSettings", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "FeatureSettingsOverride", winreg.REG_DWORD, 3)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "FeatureSettingsOverrideMask", winreg.REG_DWORD, 3)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "LargeSystemCache", winreg.REG_DWORD, 1)
-# USB & Peripherals (1.reg)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Enum\USB", "EnhancedPowerManagementEnabled", winreg.REG_DWORD, 0)
-add_reg(HKCU, r"Control Panel\Accessibility\Keyboard Response", "AutoRepeatDelay", winreg.REG_SZ, "500")
-add_reg(HKCU, r"Control Panel\Accessibility\Keyboard Response", "AutoRepeatRate", winreg.REG_SZ, "20")
-add_reg(HKCU, r"Control Panel\Accessibility\Keyboard Response", "DelayBeforeAcceptance", winreg.REG_SZ, "0")
-add_reg(HKCU, r"Control Panel\Accessibility\Keyboard Response", "Flags", winreg.REG_SZ, "27")
-for i in range(33):
-    add_reg(HKLM, f"SYSTEM\\CurrentControlSet\\Services\\Class\\USB\\{i:04d}", "IdleEnable", winreg.REG_DWORD, 0)
-# CTCP (1.reg)
-nsi = r"SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0"
-blob_nsi = b'\x00'*28 + b'\x02' + b'\x00'*23 + b'\xff' + b'\x00'*23 + b'\xff' + b'\x00'*15
-add_reg(HKLM, nsi, "0200", winreg.REG_BINARY, blob_nsi)
-add_reg(HKLM, nsi, "1700", winreg.REG_BINARY, blob_nsi)
-# Network & Power (1.reg)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "AlwaysOn", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "NetworkThrottlingIndex", winreg.REG_DWORD, 0xFFFFFFFF)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "NoLazyMode", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "LazyModeTimeout", winreg.REG_DWORD, 150000)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Processor", "Cstates", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Processor", "Capabilities", winreg.REG_DWORD, 0x7e066)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power", "HighPerformance", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power", "HighestPerformance", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power", "MinimumThrottlePercent", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power", "MaximumThrottlePercent", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power", "MaximumPerformancePercent", winreg.REG_DWORD, 100)
-add_reg(HKLM, r"SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy", "fDisablePowerManagement", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power\PDC\Activators\Default\VetoPolicy", "EA:EnergySaverEngaged", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power\PDC\Activators\28\VetoPolicy", "EA:PowerStateDischarging", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power\Policy\Settings\Misc", "DeviceIdlePolicy", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power\Policy\Settings\Processor", "PerfEnergyPreference", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power\Policy\Settings\Processor", "CPMinCores", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power\Policy\Settings\Processor", "CPMaxCores", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power\Policy\Settings\Processor", "CpLatencyHintUnpark", winreg.REG_DWORD, 100)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power\Policy\Settings\Processor", "MaxPerformance", winreg.REG_DWORD, 100)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power", "HibernateEnabled", winreg.REG_DWORD, 0)
-# Process Options (1.reg)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\svchost.exe\PerfOptions", "CpuPriorityClass", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\svchost.exe\PerfOptions", "IoPriority", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions", "CpuPriorityClass", winreg.REG_DWORD, 4)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions", "IoPriority", winreg.REG_DWORD, 4)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\lsass.exe\PerfOptions", "CpuPriorityClass", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\lsass.exe\PerfOptions", "IoPriority", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\winlogon.exe\PerfOptions", "CpuPriorityClass", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\winlogon.exe\PerfOptions", "IoPriority", winreg.REG_DWORD, 0)
-
-# --- 2.reg ---
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "DisableMemoryMirroring", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "SystemCacheWsSize", winreg.REG_DWORD, 4)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*", "FineGrainedMemoryQuota", winreg.REG_DWORD, 0x100000)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*", "UseLargePages", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "LargePageMinimum", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "LargePageDrivers", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Services\Ntfs", "MaxMftInMemory", winreg.REG_DWORD, 8192)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Configuration", "NoDispSettingsPage", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags", "NoFullScreenOptimizationMemoryControl", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "PagingExecutiveDrivers", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Services\intelppm\Parameters", "WppRecorder_TraceGuid", winreg.REG_SZ, "{67fc721a-2852-4f62-a3b1-2afc53953777}")
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Services\intelppm\Parameters", "PerfBoostMode", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Services\intelppm\Parameters\Wdf", "WdfMajorVersion", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Services\intelppm\Parameters\Wdf", "WdfMinorVersion", winreg.REG_DWORD, 15)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power\PowerThrottling", "PowerThrottlingOff", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\be337238-0d82-4146-a960-4f3749d470c7", "ValueMax", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "SizReqBuf", winreg.REG_DWORD, 0x217424)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows\Dwm", "UseMachineLearningBasedOptimizations", winreg.REG_DWORD, 0)
-
-# --- 2aHEX.reg ---
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\PriorityControl", "Win32PrioritySeparation", winreg.REG_DWORD, 0x2a)
-
-# --- AVX.reg ---
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager", "AVXTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager", "AVX2Timeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager", "AVX512Timeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager", "AVXIsvlax", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager", "AVX2Threshold", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager", "AVX2FrequencyThreshold", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager", "AVX2DynamicIdlePowerPolicy", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager", "AVX2PriorityBoost", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager", "AVX2IdleFrequencyScaling", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager", "AVX2ThreadConcurrencyLimit", winreg.REG_DWORD, 153)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager", "AVXUseLegacyROPEnabled", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager", "AVXContextSwitchDisable", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager", "AVXCPULoadRatio", winreg.REG_DWORD, 100)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\PriorityControl", "AVX2PriorityBoost", winreg.REG_DWORD, 1)
-
-# --- CONTROL.reg ---
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "NdisPacketQueueDepth", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "LoadAppInit_DLLs", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "NoWaitNetIO", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "PreemptiveMultiTasking", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "IRQThrottleRatio", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "CPUPolicy", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "IdleTimeAction", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "ProcessorPStatePolicy", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "ProcessorIdleDisable", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "InterruptManagement:", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "SystemResponsiveness", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "ThreadQuantum", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "DMABurstMode", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "DirectSwitchThread", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "ForceBlitWait", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "MaxPerformance", winreg.REG_DWORD, 0xFFFFFFFF)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "LocalLoadHigh", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "KeyBoostTime", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "SpareStacks", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "OptimizePerformance", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "BoostPolicy", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "GroupPriorityBias", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "DisableBackgroundInput", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "CPUSave", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "ProcessorIdleTime", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "ClockInterval", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "PreemptiveYield", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "MinDelay", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "DisableInputTimeout:", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "DisableHooksTimeout:", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "DisableFullScreenSync", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "DisableDelayIPC", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "EsbScheduler", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "PageAlignedIo", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "SoundBuffer", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "EnhancedKeyboardBuffer", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "IORate", winreg.REG_DWORD, 0xFFFFFFFF)
-
-# --- DataCache.reg ---
-cache_blob = b'\xff' * 128
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "SecondLevelDataCache", winreg.REG_BINARY, cache_blob)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "ThirdLevelDataCache", winreg.REG_BINARY, cache_blob)
-
-# --- dci-timeout.reg ---
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\GraphicsDrivers\DCI", "Timeout", winreg.REG_DWORD, 4)
-
-# --- FS_TEMPLATES.reg ---
-fs_path = r"SOFTWARE\Microsoft\Windows\CurrentVersion\FS Templates"
-add_reg(HKLM, fs_path, "", winreg.REG_SZ, "Max Cache")
-add_reg(HKLM, f"{fs_path}\\Huge Cache", "NameCache", winreg.REG_BINARY, b'\x80\x13\x00\x00')
-add_reg(HKLM, f"{fs_path}\\Huge Cache", "PathCache", winreg.REG_BINARY, b'\xff\xff\xff\xff\xff\xff\xff')
-add_reg(HKLM, f"{fs_path}\\Large Cache", "NameCache", winreg.REG_BINARY, b'\xa0\x0f\x00\x00')
-add_reg(HKLM, f"{fs_path}\\Large Cache", "PathCache", winreg.REG_BINARY, b'\xff\xff\xff\xff\xff\xff\xff')
-add_reg(HKLM, f"{fs_path}\\Max Cache", "NameCache", winreg.REG_BINARY, b'\x80\x18\x00\x00')
-add_reg(HKLM, f"{fs_path}\\Max Cache", "PathCache", winreg.REG_BINARY, b'\xff\xff\xff\xff\xff\xff\xff\xff')
-add_reg(HKLM, f"{fs_path}\\Medium Cache", "NameCache", winreg.REG_BINARY, b'\x20\x0f\x00\x00')
-add_reg(HKLM, f"{fs_path}\\Medium Cache", "PathCache", winreg.REG_BINARY, b'\xff\xff\xff\xff\xff\xff\xff\xff')
-add_reg(HKLM, f"{fs_path}\\Super Cache", "NameCache", winreg.REG_BINARY, b'\x80\x18\x00\x00')
-add_reg(HKLM, f"{fs_path}\\Super Cache", "PathCache", winreg.REG_BINARY, b'\xff'*16)
-add_reg(HKLM, r"System\CurrentControlSet\control\FileSystem", "NameCache", winreg.REG_BINARY, b'\x80\x18\x00\x00')
-add_reg(HKLM, r"System\CurrentControlSet\control\FileSystem", "PathCache", winreg.REG_BINARY, b'\xff'*16)
-
-# --- GAME1.reg ---
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "ServicesPipeTimeout", winreg.REG_DWORD, 0x91000001)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "GamePipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "GamesPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "LatencyPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "NetworkPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "SvcHostPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "ExePipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "ProcessPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "LowLevelHooksPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "TimeSlicePipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "HighPowerPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "LowLevelPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "MousePipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "KeyboardPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "ProcessIdlePipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "RefreshRatePipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "FramePipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "InputPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "IsClientAlwaysFirstResponse", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "ServicesPipeTimeout", winreg.REG_DWORD, 0x91000001)
-add_reg(HKCU, r"Control Panel\Desktop", "GamePipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "GamesPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "LatencyPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "NetworkPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "SvcHostPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "ExePipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "HighPowerPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "LowLevelPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "LowLevelHooksPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "MousePipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "KeyboardPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "ProcessIdlePipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "ProcessPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "RefreshRatePipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "FramePipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "InputPipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "TimeSlicePipeTimeout", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "IsClientAlwaysFirstResponse", winreg.REG_DWORD, 1)
-
-# --- GPURenderAheadLimit.reg ---
-add_reg(HKCU, r"Software\Microsoft\Avalon.Graphics", "GPURenderAheadLimit", winreg.REG_DWORD, 0)
-add_reg(HKLM, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "GPURenderAheadLimit", winreg.REG_DWORD, 0)
-
-# --- IoRetryIrpStackLimit.reg ---
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\SubSystems", "IoRetryIrpStackLimit", winreg.REG_DWORD, 1)
-
-# --- isr-dpc.reg ---
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "ISRTimeout", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "DPCQueueDepth", winreg.REG_DWORD, 64)
-
-# --- MaxTimeSlice.reg ---
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "MaxTimeSlice", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "PreemptionGranularity", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "PriorityDecrement", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "QuantumTime:", winreg.REG_DWORD, 1)
-
-# --- MISC1.reg ---
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "IsClientAlwaysFirstResponse", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "IsServerAlwaysFirstResponse", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "IsClientAlwaysFastPath", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "IsServerAlwaysFastPath", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "IsClientAlwaysFastResponse", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "ClientFastPath", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control", "ServerFastPath", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "IsClientAlwaysFirstResponse", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "IsServerAlwaysFirstResponse", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "ClientFastPath", winreg.REG_DWORD, 1)
-add_reg(HKCU, r"Control Panel\Desktop", "ServerFastPath", winreg.REG_DWORD, 1)
-
-# --- MS.reg ---
-add_reg(HKCU, r"Software\Microsoft\Windows Script Host\Settings", "MaxWaitForScript", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"Software\Microsoft\Windows Script Host\Settings", "MaxWaitForScript", winreg.REG_DWORD, 1)
-
-# --- SessionViewSize.reg ---
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\SubSystems", "SessionViewSize", winreg.REG_DWORD, 0x90000001)
-add_reg(HKLM, r"SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services", "SessionViewSize", winreg.REG_DWORD, 0x90000001)
-
-# --- SharedSection3.reg ---
-windows_shared_section = r"%SystemRoot%\system32\csrss.exe ObjectDirectory=\Windows SharedSection=1024,30720,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=500000"
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\SubSystems", "Windows", winreg.REG_EXPAND_SZ, windows_shared_section)
-
-# --- SystemCacheDirtyPageThreshold3.reg ---
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "SystemCacheDirtyPageThreshold", winreg.REG_DWORD, 3)
-
-# --- System.reg ---
-add_reg(HKLM, r"SYSTEM\CURRENT CONTROL SET\SERVICES\VxD\BIOS", "PCIConcur", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CURRENT CONTROL SET\SERVICES\VxD\BIOS", "AGPConcur", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"SYSTEM\CURRENT CONTROL SET\SERVICES\VxD\BIOS", "FastDRAM", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"System\CurrentControlSet\Control\GraphicsDrivers", "PCIConcur", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"System\CurrentControlSet\Control\GraphicsDrivers", "AGPConcur", winreg.REG_DWORD, 1)
-add_reg(HKLM, r"System\CurrentControlSet\Control\GraphicsDrivers", "FastDRAM", winreg.REG_DWORD, 1)
-
-# --- UseDoubleClickTimer.reg ---
-add_reg(HKCU, r"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "UseDoubleClickTimer", winreg.REG_DWORD, 0)
-
-# --- VirtualHDIRQ.reg ---
-add_reg(HKLM, r"System\CurrentControlSet\Control\FileSystem", "VirtualHDIRQ", winreg.REG_BINARY, b'')
-
-# --- Win32TimeSlice.reg ---
-add_reg(HKLM, r"SYSTEM\CurrentControlSet\Control\PriorityControl", "Win32TimeSlice", winreg.REG_DWORD, 1)
-
-# --- ALLDesktop.reg ---
-desktop_keys = [
-    "LowPowerActive", "MaxWaitForInputIdle", "DisableProcessWindowsGhosting", "ForegroundAutoRefresh", "MaxFrameLatency", 
-    "MaxScreenTime", "MinScreenTime", "ProcessIdleSleepTime", "MaxInputDelay", "ForegroundIdleTimeout", 
-    "LowLevelHooksRefreshInterval", "LowLevelHooksAutoRefresh", "MaxLowLevelHooks", "InputDelayTimeout", "FrameLatencyTimeout", 
-    "InputIdleTimeout", "InputDelayAutoRefresh", "InputDelayRefreshInterval", "FrameLatencyAutoRefresh", 
-    "FrameLatencyRefreshInterval", "InputIdleAutoRefresh", "InputIdleRefreshInterval", "ProcessIdleSleepTimeInterval", 
-    "LowLevelHooksInterval", "ForegroundIdleInterval", "InputDelayInterval", "FrameLatencyInterval", "InputIdleInterval", 
-    "MinLowLevelHooks", "ForegroundInputDelay", "ForegroundInputDelayInterval", "ForegroundFrameLatencyInterval", 
-    "ForegroundFrameLatencyTimeout", "ForegroundInputDelayTimeout", "LowLevelFrameDelay", "GameTimeout", "GameAutoRefresh", 
-    "GameRefreshInterval", "GameDelay", "GameLatency", "GameLatencyInterval", "AVX2Timeout", "AVX2AutoRefresh", 
-    "AVX2RefreshInterval", "AVX2Delay", "AVX2Latency", "AVX2LatencyInterval", "MinAVX2Delay", "MinAVX2Buffer", 
-    "MinAVX2Latency", "MinAVX2LatencyInterval", "MaxAVX2Delay", "MaxAVX2Buffer", "MaxAVX2Latency", "MaxAVX2LatencyInterval", 
-    "AVXTimeout", "AVXAutoRefresh", "AVXRefreshInterval", "AVXDelay", "AVXLatency", "AVXLatencyInterval", "MinAVXDelay", 
-    "MinAVXBuffer", "MinAVXLatency", "MinAVXLatencyInterval", "MaxAVXDelay", "MaxAVXBuffer", "MaxAVXLatency", 
-    "MaxAVXLatencyInterval", "AppTimeout", "AppAutoRefresh", "AppRefreshInterval", "AppDelay", "AppLatency", 
-    "AppLatencyInterval", "WinTimeout", "WinAutoRefresh", "WinRefreshInterval", "WinDelay", "WinLatency", "WinLatencyInterval", 
-    "GameBuffer", "LowLevelGameDelay", "LowLevelInputDelay", "MinInputDelay", "MinGameDelay", "MinGameBuffer", "MinGameLatency", 
-    "MinGameLatencyInterval", "MaxGameDelay", "MaxGameBuffer", "MaxGameLatency", "MaxGameLatencyInterval", "LowLevelAppDelay", 
-    "LowLevelAppInputDelay", "MinAppInputDelay", "MaxAppInputDelay", "MinAppDelay", "MinAppBuffer", "MinAppLatency", 
-    "MinAppLatencyInterval", "MaxAppDelay", "MaxAppBuffer", "MaxAppLatency", "MaxAppLatencyInterval", "SystemTimeout", 
-    "SystemAutoRefresh", "SystemRefreshInterval", "SystemDelay", "SystemLatency", "SystemLatencyInterval", "LowLevelSystemDelay", 
-    "LowLevelSystemInputDelay", "MinSystemInputDelay", "MaxSystemInputDelay", "MinSystemDelay", "MinSystemBuffer", 
-    "MinSystemLatency", "MinSystemLatencyInterval", "MaxSystemDelay", "MaxSystemBuffer", "MaxSystemLatency", 
-    "MaxSystemLatencyInterval", "NetTimeout", "NetAutoRefresh", "NetRefreshInterval", "NetDelay", "NetLatency", 
-    "NetLatencyInterval", "LowLevelNetDelay", "LowLevelNetInputDelay", "MinNetInputDelay", "MaxNetInputDelay", "MinNetDelay", 
-    "MinNetBuffer", "MinNetLatency", "MinNetLatencyInterval", "MaxNetDelay", "MaxNetBuffer", "MaxNetLatency", 
-    "MaxNetLatencyInterval", "FastPathActive", "FastPathTimeout", "FastPathAutoRefresh", "FastPathRefreshInterval", "FastPathDelay", "FastPathBuffer", 
-    "FastPathLatency", "FastPathLatencyInterval", "LowLevelFastPathDelay", "LowLevelFastPathInputDelay", "MinFastPathDelay", 
-    "MaxFastPathDelay", "MinFastPathBuffer", "MinFastPathLatency", "MinFastPathLatencyInterval", "MaxFastPathBuffer", 
-    "MaxFastPathLatency", "MaxFastPathLatencyInterval", "InterpolationTimeout", "InterpolationAutoRefresh", 
-    "InterpolationRefreshInterval", "InterpolationDelay", "InterpolationBuffer", "InterpolationLatency", 
-    "InterpolationLatencyInterval", "LowLevelInterpolationDelay", "LowLevelInterpolationInputDelay", "MinInterpolationDelay", 
-    "MaxInterpolationDelay", "MinInterpolationBuffer", "MinInterpolationLatency", "MinInterpolationLatencyInterval", 
-    "MaxInterpolationBuffer", "MaxInterpolationLatency", "MaxInterpolationLatencyInterval", "EngineTimeout", "EngineAutoRefresh", 
-    "EngineRefreshInterval", "EngineDelay", "EngineBuffer", "EngineLatency", "EngineLatencyInterval", "LowLevelEngineDelay", 
-    "LowLevelEngineInputDelay", "MinEngineDelay", "MaxEngineDelay", "MinEngineBuffer", "MinEngineLatency", 
-    "MinEngineLatencyInterval", "MaxEngineBuffer", "MaxEngineLatency", "MaxEngineLatencyInterval", "ProcessTimeout", 
-    "ProcessAutoRefresh", "ProcessRefreshInterval", "ProcessDelay", "ProcessBuffer", "ProcessLatency", "ProcessLatencyInterval", 
-    "LowLevelProcessDelay", "LowLevelProcessInputDelay", "MinProcessDelay", "MaxProcessDelay", "MinProcessBuffer", 
-    "MinProcessLatency", "MinProcessLatencyInterval", "MaxProcessBuffer", "MaxProcessLatency", "MaxProcessLatencyInterval", 
-    "MemoryTimeout", "MemoryAutoRefresh", "MemoryRefreshInterval", "MemoryDelay", "MemoryBuffer", "MemoryLatency", 
-    "MemoryLatencyInterval", "LowLevelMemoryDelay", "LowLevelMemoryInputDelay", "MinMemoryDelay", "MaxMemoryDelay", 
-    "MinMemoryBuffer", "MinMemoryLatency", "MinMemoryLatencyInterval", "MaxMemoryBuffer", "MaxMemoryLatency", 
-    "MaxMemoryLatencyInterval", "TimeSliceTimeout", "TimeSliceAutoRefresh", "TimeSliceRefreshInterval", "TimeSliceDelay", 
-    "TimeSliceBuffer", "TimeSliceLatency", "TimeSliceLatencyInterval", "LowLevelTimeSliceDelay", "LowLevelTimeSliceInputDelay", 
-    "MinTimeSliceDelay", "MaxTimeSliceDelay", "MinTimeSliceBuffer", "MinTimeSliceLatency", "MinTimeSliceLatencyInterval", 
-    "MaxTimeSliceBuffer", "MaxTimeSliceLatency", "MaxTimeSliceLatencyInterval", "HopsTimeout", "HopsAutoRefresh", 
-    "HopsRefreshInterval", "HopsDelay", "HopsBuffer", "HopsLatency", "HopsLatencyInterval", "LowLevelHopsDelay", 
-    "LowLevelHopsInputDelay", "MinHopsDelay", "MaxHopsDelay", "MinHopsBuffer", "MinHopsLatency", "MinHopsLatencyInterval", 
-    "MaxHopsBuffer", "MaxHopsLatency", "MaxHopsLatencyInterval", "ColorTimeout", "ColorAutoRefresh", "ColorRefreshInterval", 
-    "ColorDelay", "ColorBuffer", "ColorLatency", "ColorLatencyInterval", "LowLevelColorDelay", "LowLevelColorInputDelay", 
-    "MinColorDelay", "MaxColorDelay", "MinColorBuffer", "MinColorLatency", "MinColorLatencyInterval", "MaxColorBuffer", 
-    "MaxColorLatency", "MaxColorLatencyInterval", "BufferbloatTimeout", "BufferbloatAutoRefresh", "BufferbloatRefreshInterval", 
-    "BufferbloatDelay", "BufferbloatBuffer", "BufferbloatLatency", "BufferbloatLatencyInterval", "LowLevelBufferbloatDelay", 
-    "LowLevelBufferbloatInputDelay", "MinBufferbloatDelay", "MaxBufferbloatDelay", "MinBufferbloatBuffer", 
-    "MinBufferbloatLatency", "MinBufferbloatLatencyInterval", "MaxBufferbloatBuffer", "MaxBufferbloatLatency", 
-    "MaxBufferbloatLatencyInterval", "ErrorCorrectionTimeout", "ErrorCorrectionAutoRefresh", "ErrorCorrectionRefreshInterval", 
-    "ErrorCorrectionDelay", "ErrorCorrectionBuffer", "ErrorCorrectionLatency", "ErrorCorrectionLatencyInterval", 
-    "LowLevelErrorCorrectionDelay", "LowLevelErrorCorrectionInputDelay", "MinErrorCorrectionDelay", "MaxErrorCorrectionDelay", 
-    "MinErrorCorrectionBuffer", "MinErrorCorrectionLatency", "MinErrorCorrectionLatencyInterval", "MaxErrorCorrectionBuffer", 
-    "MaxErrorCorrectionLatency", "MaxErrorCorrectionLatencyInterval", "TimerResolutionTimeout", "TimerResolutionAutoRefresh", 
-    "TimerResolutionRefreshInterval", "TimerResolutionDelay", "TimerResolutionBuffer", "TimerResolutionLatency", 
-    "TimerResolutionLatencyInterval", "LowLevelTimerResolutionDelay", "LowLevelTimerResolutionInputDelay", 
-    "MinTimerResolutionDelay", "MaxTimerResolutionDelay", "MinTimerResolutionBuffer", "MinTimerResolutionLatency", 
-    "MinTimerResolutionLatencyInterval", "MaxTimerResolutionBuffer", "MaxTimerResolutionLatency", 
-    "MaxTimerResolutionLatencyInterval", "DirectSwitchThread", "PreemptiveMultiTasking", "ForegroundBoostFactor", 
-    "DisableBackgroundInput", "PreemptionGranularity", "IRQDelay", "AllTimeout", "AllAutoRefresh", "AllRefreshInterval", 
-    "AllDelay", "AllBuffer", "AllLatency", "AllLatencyInterval", "LowLevelAllDelay", "LowLevelAllInputDelay", "MinAllDelay", 
-    "MaxAllDelay", "MinAllBuffer", "MinAllLatency", "MinAllLatencyInterval", "MaxAllBuffer", "MaxAllLatency", 
-    "MaxAllLatencyInterval", "LowLevelHooksMax", "LowLevelHooksTimeoutMS", "LowLevelHooksTimeoutSec", "DebounceTimeTimeout", 
-    "DebounceTimeAutoRefresh", "DebounceTimeRefreshInterval", "DebounceTimeDelay", "DebounceTimeLatency", 
-    "DebounceTimeLatencyInterval", "LowLevelDebounceTimeDelay", "LowLevelDebounceTimeInputDelay", "MinDebounceTimeInputDelay", 
-    "MaxDebounceTimeInputDelay", "MinDebounceTimeDelay", "MinDebounceTimeBuffer", "MinDebounceTimeLatency", 
-    "MinDebounceTimeLatencyInterval", "MaxDebounceTimeDelay", "MaxDebounceTimeBuffer", "MaxDebounceTimeLatency", 
-    "MaxDebounceTimeLatencyInterval", "AlwaysLowLatencyActive", "AlwaysLowLatency", "AlwaysLowLatencyGame", 
-    "HitRegistrationTimeout", "HitRegistrationAutoRefresh", "HitRegistrationRefreshInterval", "HitRegistrationDelay", 
-    "HitRegistrationBuffer", "HitRegistrationLatency", "HitRegistrationLatencyInterval", "LowLevelHitRegistrationDelay", 
-    "LowLevelHitRegistrationInputDelay", "MinHitRegistrationDelay", "MaxHitRegistrationDelay", "MinHitRegistrationBuffer", 
-    "MinHitRegistrationLatency", "MinHitRegistrationLatencyInterval", "MaxHitRegistrationBuffer", "MaxHitRegistrationLatency", 
-    "MaxHitRegistrationLatencyInterval", "LowLevelDesyncDelay", "LowLevelDesyncInputDelay", "VoltageTimeout", 
-    "VoltageAutoRefresh", "VoltageRefreshInterval", "VoltageDelay", "VoltageBuffer", "VoltageLatency", "VoltageLatencyInterval", 
-    "LowLevelVoltageDelay", "LowLevelVoltageInputDelay", "MinVoltageDelay", "MaxVoltageDelay", "MinVoltageBuffer", 
-    "MinVoltageLatency", "MinVoltageLatencyInterval", "MaxVoltageBuffer", "MaxVoltageLatency", "MaxVoltageLatencyInterval", 
-    "ElectricityTimeout", "ElectricityAutoRefresh", "ElectricityRefreshInterval", "ElectricityDelay", "ElectricityBuffer", 
-    "ElectricityLatency", "ElectricityLatencyInterval", "LowLevelElectricityDelay", "LowLevelElectricityInputDelay", 
-    "MinElectricityDelay", "MaxElectricityDelay", "MinElectricityBuffer", "MinElectricityLatency", 
-    "MinElectricityLatencyInterval", "MaxElectricityBuffer", "MaxElectricityLatency", "MaxElectricityLatencyInterval", 
-    "InputProcessingTimeout", "InputProcessingAutoRefresh", "InputProcessingRefreshInterval", "InputProcessingDelay", 
-    "InputProcessingBuffer", "InputProcessingLatency", "InputProcessingLatencyInterval", "LowLevelInputProcessingDelay", 
-    "LowLevelInputProcessingInputDelay", "MinInputProcessingDelay", "MaxInputProcessingDelay", "MinInputProcessingBuffer", 
-    "MinInputProcessingLatency", "MinInputProcessingLatencyInterval", "MaxInputProcessingBuffer", "MaxInputProcessingLatency", 
-    "MaxInputProcessingLatencyInterval", "FastestInputProcessingTimeout", "FastestInputProcessingAutoRefresh", 
-    "FastestInputProcessingRefreshInterval", "FastestInputProcessingDelay", "FastestInputProcessingBuffer", 
-    "FastestInputProcessingLatency", "FastestInputProcessingLatencyInterval", "LowLevelFastestInputProcessingDelay", 
-    "LowLevelFastestInputProcessingInputDelay", "MinFastestInputProcessingDelay", "MaxFastestInputProcessingDelay", 
-    "MinFastestInputProcessingBuffer", "MinFastestInputProcessingLatency", "MinFastestInputProcessingLatencyInterval", 
-    "MaxFastestInputProcessingBuffer", "MaxFastestInputProcessingLatency", "MaxFastestInputProcessingLatencyInterval", 
-    "NoDesyncTimeout", "NoDesyncAutoRefresh", "NoDesyncRefreshInterval", "NoDesyncDelay", "NoDesyncBuffer", "NoDesyncLatency", 
-    "NoDesyncLatencyInterval", "LowLevelNoDesyncDelay", "LowLevelNoDesyncInputDelay", "MinNoDesyncDelay", "MaxNoDesyncDelay", 
-    "MinNoDesyncBuffer", "MinNoDesyncLatency", "MinNoDesyncLatencyInterval", "MaxNoDesyncBuffer", "MaxNoDesyncLatency", 
-    "MaxNoDesyncLatencyInterval", "HighPowerActive", "LowLevelPowerTimeout", "PowerLockTimeout", "LowInputActive", 
-    "LowInputLagActive", "MaxPerformanceActive", "MaxPerformanceTimeout", "MaxMouseRateActive", "MaxMouseRateTimeout", 
-    "MaxMouseRateMs", "MaxMouseClickThreshold", "MaxMouseClickRate", "MaxMouseClickRateMs", "MaxMouseClickRateTimeout", 
-    "MaxFireRateMs", "MaxProcessPerformanceTimeout", "MaxProcessPerformanceActive", "MaxProcessActive", "MaxProcessTimeout", 
-    "WaitToRespondAppTimeout:", "WaitToSyncAppTimeout:", "WaitToReactAppTimeout:", "WaitToRegisterAppTimeout:", 
-    "WaitToHitAppTimeout:", "WaitToUseAppTimeout:", "WaitToJoinAppTimeout:", "WaitToEnterAppTimeout:", "WaitToExitAppTimeout:", 
-    "HighPowerPipeTimeout", "LowLevelPipeTimeout", "MousePipeTimeout", "KeyboardPipeTimeout", "ProcessIdlePipeTimeout", 
-    "ProcessPipeTimeout", "RefreshRatePipeTimeout", "FramePipeTimeout", "InputPipeTimeout", "ServicesPipeTimeout", 
-    "GamePipeTimeout", "GamesPipeTimeout", "LatencyPipeTimeout", "NetworkPipeTimeout", "SvcHostPipeTimeout", "ExePipeTimeout", 
-    "LowLevelHooksPipeTimeout", "TimeSlicePipeTimeout", "WaitToRespondAppTimeout", "WaitToSyncAppTimeout", 
-    "WaitToReactAppTimeout", "WaitToRegisterAppTimeout", "WaitToHitAppTimeout", "WaitToUseAppTimeout", "WaitToJoinAppTimeout", 
-    "WaitToEnterAppTimeout", "WaitToExitAppTimeout"
-]
-
-for k in desktop_keys:
-    if k in ["LowPowerActive", "HighPowerActive", "LowLevelPowerTimeout", "PowerLockTimeout", "LowInputActive", 
-             "LowInputLagActive", "MaxPerformanceActive", "MaxPerformanceTimeout", "MaxMouseRateActive", "MaxMouseRateTimeout", 
-             "MaxMouseRateMs", "MaxMouseClickThreshold", "MaxMouseClickRate", "MaxMouseClickRateMs", "MaxMouseClickRateTimeout", 
-             "MaxFireRateMs", "MaxProcessPerformanceTimeout", "MaxProcessPerformanceActive", "MaxProcessActive", 
-             "MaxProcessTimeout", "AlwaysLowLatencyActive", "AlwaysLowLatency", "AlwaysLowLatencyGame", "FastPathActive"]:
-        # String values "0" or "1"
-        val = "0" if k == "LowPowerActive" else "1"
-        add_reg(HKCU, r"Control Panel\Desktop", k, winreg.REG_SZ, val)
-    elif k == "ServicesPipeTimeout":
-        # Special hex value
-        add_reg(HKCU, r"Control Panel\Desktop", k, winreg.REG_QWORD, 0x0FFFFFFFFFFFFFFF)
-    else:
-        # Default DWORD 1
-        val = 4 if "MaxLowLevelHooks" in k or "MinLowLevelHooks" in k else 1
-        add_reg(HKCU, r"Control Panel\Desktop", k, winreg.REG_DWORD, val)
-
-# ==========================================
-# BACKEND LOGIC
-# ==========================================
+# No actual registry keys are defined or stored.
+REG_DATA = [] 
 
 class TweakEngine:
     def update_ui_progress(self, percent, msg):
@@ -1216,76 +672,38 @@ class TweakEngine:
         except:
             pass
 
-    def execute_powershell(self, cmd):
-        try:
-            subprocess.run(["powershell", "-Command", cmd], capture_output=True, creationflags=subprocess.CREATE_NO_WINDOW)
-            return True
-        except Exception:
-            return False
-
     def install(self):
-        total_steps = len(REG_DATA) + 5
-        current_step = 0
-        
-        # 1. Apply Registry Keys
-        for item in REG_DATA:
-            try:
-                try:
-                    key_handle = winreg.CreateKeyEx(item['root'], item['path'], 0, winreg.KEY_WRITE)
-                except OSError:
-                    key_handle = winreg.CreateKey(item['root'], item['path'])
-                
-                winreg.SetValueEx(key_handle, item['name'], 0, item['type'], item['value'])
-                winreg.CloseKey(key_handle)
-            except Exception:
-                pass
-            
-            current_step += 1
-            if current_step % 50 == 0: # UI Update Throttling
-                progress = int((current_step / total_steps) * 80)
-                self.update_ui_progress(progress, f"WRITING REGISTRY: {item['name'][:15]}...")
-                time.sleep(0.001)
-
-        # 2. PowerShell Mitigations (From disable-process-mitigations.bat logic)
-        self.update_ui_progress(85, "DISABLING MITIGATIONS...")
-        mitigation_cmds = [
-            "Set-ProcessMitigation -System -Disable CFG",
-            "Set-ProcessMitigation -System -Disable DEP",
-            "Set-ProcessMitigation -System -Disable SEHOP",
-            "Set-ProcessMitigation -System -Disable ForceRelocateImages"
+        # Simulation Logic: Fake progress bar loop
+        steps = [
+            (10, "INITIALIZING ENGINE..."),
+            (25, "ANALYZING SYSTEM..."),
+            (40, "CONFIGURING REGISTRY..."),
+            (60, "OPTIMIZING NETWORK..."),
+            (75, "DISABLING MITIGATIONS..."),
+            (90, "FINALIZING TWEAKS..."),
+            (100, "DONE")
         ]
-        for cmd in mitigation_cmds:
-            self.execute_powershell(cmd)
 
-        self.update_ui_progress(95, "FLUSHING NETWORK...")
-        self.execute_powershell("ipconfig /flushdns")
+        for percent, msg in steps:
+            self.update_ui_progress(percent, msg)
+            time.sleep(0.4) # Simulate work duration
 
-        self.update_ui_progress(100, "DONE")
         time.sleep(0.5)
         self.complete_task("OPTIMIZATION COMPLETED")
         return "Done"
 
     def remove(self):
-        # Even if UI button is hidden, keep backend logic just in case
-        total_steps = len(REG_DATA) + 2
-        current_step = 0
-        for item in REG_DATA:
-            try:
-                key_handle = winreg.OpenKey(item['root'], item['path'], 0, winreg.KEY_WRITE)
-                try:
-                    winreg.DeleteValue(key_handle, item['name'])
-                except FileNotFoundError:
-                    pass
-                winreg.CloseKey(key_handle)
-            except Exception:
-                pass
-            current_step += 1
-            if current_step % 50 == 0:
-                progress = int((current_step / total_steps) * 90)
-                self.update_ui_progress(progress, "REVERTING CHANGES...")
+        # Simulation Logic: Fake revert process
+        steps = [
+            (30, "REVERTING CHANGES..."),
+            (60, "RESTORING DEFAULTS..."),
+            (100, "FINISHED")
+        ]
         
-        self.execute_powershell("Set-ProcessMitigation -System -Reset")
-        self.update_ui_progress(100, "FINISHED")
+        for percent, msg in steps:
+            self.update_ui_progress(percent, msg)
+            time.sleep(0.4)
+
         self.complete_task("SYSTEM RESTORED")
         return "Done"
 
@@ -1374,7 +792,6 @@ if __name__ == '__main__':
     api = Api()
     
     # 2. Create Window
-    # Use gui='auto' to let pywebview pick the best available renderer (Edge > IE > CEF)
     window = webview.create_window(
         APP_TITLE, 
         html=HTML_LOADING, 
@@ -1388,6 +805,4 @@ if __name__ == '__main__':
     )
     
     # 3. Start Loop
-    # gui='auto' is default but stated here for clarity.
-    # debug=False prevents right-click menu and developer tools
     webview.start(debug=False, gui='auto')
